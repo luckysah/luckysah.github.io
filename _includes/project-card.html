@@ -1,0 +1,10 @@
+<!-- One project card. Used on the home page and the All projects page. -->
+<a class="card" href="{{ include.project.url | relative_url }}">
+  {% if include.project.cover %}<img src="{{ include.project.url | append: include.project.cover | relative_url }}" alt="{{ include.project.title }}">{% endif %}
+  <div class="card-body">
+    <span class="tag">{{ include.project.category }}</span>
+    <h3>{{ include.project.title }}</h3>
+    <p>{{ include.project.summary }}</p>
+    <span class="card-link">View project →</span>
+  </div>
+</a>

@@ -1,0 +1,1233 @@
+/* ==========================================================================
+   Lucky Sah — portfolio styles
+   One stylesheet for the whole site. Colours and sizes live in :root.
+   ========================================================================== */
+
+:root {
+  --bg: #ffffff;
+  --bg-soft: #f6f7f9;
+  --text: #16181d;
+  --muted: #5b6270;
+  --border: #e3e6eb;
+  --accent: #1f4fd1;
+  --accent-dark: #173c9f;
+
+  --font: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  --mono: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+
+  --width: 960px;
+  --width-article: 720px;
+  --radius: 8px;
+}
+
+/* ---------- Base ---------- */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
+  }
+}
+
+html {
+  scroll-padding-top: 80px; /* keeps headings clear of the sticky header */
+}
+
+body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font);
+  font-size: 17px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+h1,
+h2,
+h3 {
+  line-height: 1.25;
+  letter-spacing: -0.01em;
+}
+
+h1 {
+  font-size: clamp(2.2rem, 5vw, 3rem);
+  margin: 0 0 12px;
+}
+
+h2 {
+  font-size: 1.6rem;
+  margin: 0 0 24px;
+}
+
+h3 {
+  font-size: 1.15rem;
+  margin: 0 0 6px;
+}
+
+p {
+  margin: 0 0 16px;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+a:focus-visible,
+.button:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+.container {
+  max-width: var(--width);
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+/* ---------- Header ---------- */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  background: rgba(255, 255, 255, 0.95);
+  border-bottom: 1px solid var(--border);
+}
+
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  min-height: 64px;
+}
+
+.logo {
+  font-weight: 700;
+  color: var(--text);
+}
+
+.logo:hover {
+  text-decoration: none;
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 24px;
+}
+
+.site-nav a {
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.site-nav a:hover {
+  color: var(--text);
+  text-decoration: none;
+}
+
+/* ---------- Buttons ---------- */
+
+.button {
+  display: inline-block;
+  padding: 10px 18px;
+  border: 1px solid var(--accent);
+  border-radius: var(--radius);
+  background: var(--accent);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.button:hover {
+  background: var(--accent-dark);
+  border-color: var(--accent-dark);
+  text-decoration: none;
+}
+
+.button-outline {
+  background: transparent;
+  color: var(--accent);
+}
+
+.button-outline:hover {
+  background: var(--bg-soft);
+  color: var(--accent-dark);
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+/* ---------- Home: two-column layout ---------- */
+
+.layout {
+  max-width: 1160px;
+  margin: 0 auto;
+  padding: 64px 32px;
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 72px;
+}
+
+/* Left column. Stays in view while scrolling, but only on screens tall
+   enough to show all of it. */
+.sidebar {
+  align-self: start;
+}
+
+@media (min-height: 960px) {
+  .sidebar {
+    position: sticky;
+    top: 64px;
+  }
+}
+
+.photo {
+  position: relative;
+  width: 100%;
+  max-width: 240px;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 24px;
+}
+
+.photo span {
+  font-size: 48px;
+  font-weight: 700;
+  color: var(--border);
+}
+
+.photo img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.name {
+  font-size: 1.75rem;
+  margin: 0 0 4px;
+}
+
+.role {
+  color: var(--muted);
+  margin-bottom: 24px;
+}
+
+.side-info {
+  margin: 0;
+  padding: 24px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  font-size: 15px;
+}
+
+.side-info dt {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-top: 16px;
+}
+
+.side-info dt:first-child {
+  margin-top: 0;
+}
+
+.side-info dd {
+  margin: 2px 0 0;
+  line-height: 1.5;
+}
+
+.side-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 16px;
+}
+
+.side-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding-top: 24px;
+}
+
+.side-nav a {
+  color: var(--muted);
+  font-size: 15px;
+}
+
+.side-nav a:hover {
+  color: var(--text);
+  text-decoration: none;
+}
+
+/* Right column */
+.content {
+  min-width: 0;
+}
+
+.section {
+  padding: 48px 0;
+  border-top: 1px solid var(--border);
+}
+
+.section:first-child {
+  padding-top: 0;
+  border-top: none;
+}
+
+.content p {
+  max-width: 680px;
+}
+
+.content-footer {
+  border-top: 1px solid var(--border);
+  padding-top: 24px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+/* Two-column "label | content" rows used for experience and education */
+.entry {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 0 24px;
+  margin-bottom: 32px;
+}
+
+.entry.education {
+  margin-top: 32px;
+}
+
+.entry:last-child {
+  margin-bottom: 0;
+}
+
+.entry .org {
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+.entry .date {
+  color: var(--muted);
+  font-size: 15px;
+  white-space: nowrap;
+}
+
+.entry ul {
+  grid-column: 1 / -1;
+  margin: 0;
+  padding-left: 20px;
+  color: var(--muted);
+}
+
+.entry li {
+  margin-bottom: 4px;
+}
+
+/* "What I work on": one clickable card per area (one per page in the work folder) */
+.area-cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px;
+}
+
+.area-card {
+  display: flex;
+  flex-direction: column;
+  padding: 22px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  color: var(--text);
+  transition: border-color 0.15s ease, background 0.15s ease;
+}
+
+.area-card:hover {
+  border-color: var(--accent);
+  background: var(--bg-soft);
+  text-decoration: none;
+}
+
+.area-card h3 {
+  font-size: 1.05rem;
+  margin: 0 0 6px;
+}
+
+.area-card p {
+  margin: 0 0 14px;
+  font-size: 15px;
+  color: var(--muted);
+  flex: 1;
+}
+
+.area-card .chips {
+  margin-bottom: 14px;
+}
+
+/* Small rounded labels for tools and skills */
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.chips li {
+  padding: 3px 10px;
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  background: var(--bg);
+  font-size: 13px;
+  color: var(--text);
+}
+
+/* Links under an experience entry to the related area pages */
+.entry-tags {
+  grid-column: 1 / -1;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.entry-tags a {
+  padding: 2px 10px;
+  border-radius: 999px;
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  font-size: 13px;
+  color: var(--muted);
+}
+
+.entry-tags a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* Area of work pages */
+.area-page {
+  padding: 40px 0 80px;
+}
+
+.area-page .lead {
+  font-size: 1.15rem;
+  color: var(--muted);
+  max-width: 680px;
+}
+
+.area-section {
+  padding: 40px 0;
+  border-top: 1px solid var(--border);
+  margin-top: 32px;
+}
+
+.area-section + .area-section {
+  margin-top: 0;
+}
+
+.area-section h2 {
+  font-size: 1.3rem;
+  margin: 0 0 20px;
+}
+
+.area-section .section-head h2 {
+  margin: 0;
+}
+
+.area-section .chips li {
+  font-size: 14px;
+  padding: 5px 12px;
+}
+
+.area-text h2 {
+  margin-top: 0;
+}
+
+.muted {
+  color: var(--muted);
+}
+
+.area-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 28px;
+  font-weight: 600;
+}
+
+/* Awards & activities: two short lists side by side */
+.columns-2 {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px 40px;
+  margin-bottom: 40px;
+}
+
+.columns-2 h3 {
+  font-size: 1rem;
+  margin: 0 0 10px;
+}
+
+.plain-list {
+  margin: 0;
+  padding-left: 20px;
+  color: var(--muted);
+}
+
+.plain-list li {
+  margin-bottom: 4px;
+}
+
+/* Section heading with a link on the right ("View all projects →") */
+.section-head {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 8px 24px;
+  margin-bottom: 24px;
+}
+
+.section-head h2 {
+  margin: 0;
+}
+
+.section-head a {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+/* All projects page */
+.projects-page {
+  padding: 56px 0 80px;
+}
+
+.projects-page .lead {
+  color: var(--muted);
+  font-size: 1.15rem;
+  margin-bottom: 40px;
+}
+
+/* Project cards */
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  align-items: start; /* a card without a photo doesn't stretch to match one with */
+  gap: 20px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  overflow: hidden;
+  color: var(--text);
+  transition: border-color 0.15s ease;
+}
+
+.card:hover {
+  border-color: var(--accent);
+  text-decoration: none;
+}
+
+.card img {
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  background: var(--bg-soft);
+  border-bottom: 1px solid var(--border);
+}
+
+.card-body {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.card-body p {
+  color: var(--muted);
+  font-size: 15px;
+  flex: 1;
+}
+
+.card-link {
+  color: var(--accent);
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.tag {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 8px;
+}
+
+/* Publications */
+.publication {
+  margin: 0;
+  color: var(--muted);
+}
+
+.publication strong {
+  color: var(--text);
+}
+
+/* Skills */
+.skills {
+  display: grid;
+  grid-template-columns: 180px 1fr;
+  gap: 12px 24px;
+  margin: 0;
+}
+
+.skills dt {
+  font-weight: 600;
+}
+
+.skills dd {
+  margin: 0;
+  color: var(--muted);
+}
+
+/* ---------- Footer ---------- */
+
+.site-footer {
+  border-top: 1px solid var(--border);
+  padding: 28px 0;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.site-footer .container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 8px 24px;
+}
+
+.site-footer nav {
+  display: flex;
+  gap: 20px;
+}
+
+.site-footer a {
+  color: var(--muted);
+}
+
+/* ---------- Project / tutorial pages ---------- */
+
+.article {
+  max-width: var(--width-article);
+  margin: 0 auto;
+  padding: 40px 24px 80px;
+}
+
+.back {
+  display: inline-block;
+  font-size: 15px;
+  margin-bottom: 32px;
+}
+
+.article .lead {
+  font-size: 1.15rem;
+  color: var(--muted);
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 32px;
+  margin: 24px 0 0;
+  padding: 16px 0;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+  font-size: 15px;
+}
+
+.meta div {
+  display: flex;
+  flex-direction: column;
+}
+
+.meta dt {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.meta dd {
+  margin: 0;
+}
+
+.article h2 {
+  font-size: 1.4rem;
+  margin: 48px 0 16px;
+}
+
+.article h3 {
+  margin: 32px 0 12px;
+}
+
+.article ul,
+.article ol {
+  padding-left: 22px;
+}
+
+.article li {
+  margin-bottom: 6px;
+}
+
+.article figure {
+  margin: 32px 0;
+}
+
+.article figcaption {
+  margin-top: 8px;
+  font-size: 14px;
+  color: var(--muted);
+}
+
+.article figure img {
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+}
+
+.article table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 15px;
+  margin: 16px 0;
+}
+
+.article th,
+.article td {
+  text-align: left;
+  padding: 8px 12px;
+  border-bottom: 1px solid var(--border);
+}
+
+.article th {
+  background: var(--bg-soft);
+}
+
+code {
+  font-family: var(--mono);
+  font-size: 0.9em;
+  background: var(--bg-soft);
+  padding: 2px 5px;
+  border-radius: 4px;
+}
+
+pre {
+  background: var(--bg-soft);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 16px;
+  overflow-x: auto;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+pre code {
+  background: none;
+  padding: 0;
+}
+
+/* Content written in Markdown (each project index.md) */
+.article .cover {
+  margin-top: 32px;
+}
+
+.article img,
+.article video,
+.article iframe {
+  width: 100%;
+  border-radius: var(--radius);
+  border: 1px solid var(--border);
+  margin: 24px 0 8px;
+}
+
+.article iframe {
+  aspect-ratio: 16 / 9;
+  height: auto;
+}
+
+/* Shown where a project's demo video will go, until the file is added */
+.media-placeholder {
+  aspect-ratio: 16 / 9;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 32px 0 8px;
+  border: 1px dashed var(--border);
+  border-radius: var(--radius);
+  background: var(--bg-soft);
+  color: var(--muted);
+  font-size: 15px;
+}
+
+/* Photos in the text: tall (portrait) ones are capped so they don't fill the screen */
+.article img:not(.cover) {
+  width: auto;
+  max-width: 100%;
+  max-height: 560px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Diagrams (SVG) always fill the column so their text stays readable */
+.article img[src$=".svg"] {
+  width: 100%;
+  max-height: none;
+  background: #fff;
+}
+
+/* *Caption* written on the line right after an image */
+.article img + em {
+  display: block;
+  font-size: 14px;
+  color: var(--muted);
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.article blockquote {
+  margin: 24px 0;
+  padding: 14px 18px;
+  background: var(--bg-soft);
+  border-left: 3px solid var(--accent);
+  border-radius: 0 var(--radius) var(--radius) 0;
+  color: var(--muted);
+}
+
+.article blockquote p:last-child {
+  margin-bottom: 0;
+}
+
+.article .highlight {
+  background: none;
+}
+
+/* Wide tables scroll sideways on phones instead of squashing */
+.article table {
+  display: block;
+  overflow-x: auto;
+}
+
+/* Collapsible sections: <details markdown="1"><summary>Title</summary> ... </details> */
+.article details {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0 18px;
+  margin: 20px 0;
+}
+
+.article summary {
+  cursor: pointer;
+  font-weight: 600;
+  padding: 14px 0;
+}
+
+.article details[open] summary {
+  border-bottom: 1px solid var(--border);
+  margin-bottom: 8px;
+}
+
+.note {
+  background: var(--bg-soft);
+  border-left: 3px solid var(--accent);
+  padding: 14px 18px;
+  border-radius: 0 var(--radius) var(--radius) 0;
+  color: var(--muted);
+  margin: 24px 0;
+}
+
+/* ---------- Tablets and phones: stack the two columns ---------- */
+
+@media (max-width: 900px) {
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    padding: 40px 24px;
+  }
+
+  .sidebar {
+    position: static;
+  }
+
+  .photo {
+    max-width: 180px;
+  }
+
+  .side-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 6px 20px;
+  }
+}
+
+/* ---------- Small screens ---------- */
+
+@media (max-width: 680px) {
+  body {
+    font-size: 16px;
+  }
+
+  .site-header {
+    position: static;
+  }
+
+  .site-header .container {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 8px;
+    padding-top: 16px;
+    padding-bottom: 16px;
+  }
+
+  .section {
+    padding: 48px 0;
+  }
+
+  .entry {
+    grid-template-columns: 1fr;
+  }
+
+  .entry .date {
+    margin-bottom: 8px;
+  }
+
+  .skills {
+    grid-template-columns: 1fr;
+    gap: 2px;
+  }
+
+  .area-cards,
+  .columns-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .skills dd {
+    margin-bottom: 12px;
+  }
+}
+
+/* ==========================================================================
+   Wide project pages ("wide: true" in a project's index.md)
+   Full-width layout: title beside the cover photo, an "On this page" menu,
+   and photos placed beside their text.
+   ========================================================================== */
+
+.wide-page {
+  --width-wide: 1320px;
+}
+
+.wide-page .site-header .container,
+.wide-page .site-footer .container {
+  max-width: var(--width-wide);
+}
+
+.article.wide {
+  max-width: var(--width-wide);
+  padding: 32px 40px 80px;
+}
+
+/* Title and details on the left, cover photo on the right */
+.wide .article-head {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 48px;
+  align-items: center;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--border);
+}
+
+.wide .article-head h1 {
+  font-size: clamp(2rem, 3.2vw, 2.8rem);
+  line-height: 1.15;
+  margin: 12px 0 16px;
+}
+
+.wide .article-head .meta {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 16px 24px;
+  border-bottom: none;
+}
+
+.wide .article-head .cover {
+  margin: 0;
+  max-height: 460px;
+  object-fit: cover;
+}
+
+/* Menu on the left, content on the right */
+.article-body {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 56px;
+  margin-top: 8px;
+}
+
+.toc {
+  position: sticky;
+  top: 88px;
+  align-self: start;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding-top: 48px;
+  font-size: 14px;
+}
+
+.toc-title {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin: 0 0 8px;
+}
+
+.toc a {
+  color: var(--muted);
+  padding: 5px 0 5px 12px;
+  border-left: 2px solid var(--border);
+}
+
+.toc a:hover {
+  color: var(--accent);
+  border-left-color: var(--accent);
+  text-decoration: none;
+}
+
+.prose h2 {
+  scroll-margin-top: 88px;
+  padding-top: 8px;
+}
+
+.prose h2:first-child {
+  margin-top: 48px;
+}
+
+/* Photo (or video) beside its text. Add "reverse" to put the photo on the right. */
+.split {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: center;
+  margin: 32px 0;
+}
+
+.split.reverse > :first-child {
+  order: 2;
+}
+
+.split > * > :first-child {
+  margin-top: 0;
+}
+
+.split > * > :last-child {
+  margin-bottom: 0;
+}
+
+.split h3 {
+  margin-top: 0;
+}
+
+/* Small photo + text, used for links to related projects */
+.split.compact {
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 28px;
+}
+
+.wide .split.compact figure img {
+  aspect-ratio: 1;
+}
+
+/* Two blocks of text or tables side by side, aligned at the top */
+.columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: start;
+  margin: 24px 0;
+}
+
+.columns > * > :first-child {
+  margin-top: 0;
+}
+
+/* Code shown beside text: slightly smaller so typical lines fit */
+.columns pre {
+  font-size: 13px;
+}
+
+/* Boxed panel, used for "the problem / the solution" and settings */
+.panel {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 20px 24px;
+  background: var(--bg-soft);
+}
+
+.panel h3,
+.panel h4 {
+  margin: 0 0 10px;
+}
+
+/* Photos in a row, each with its caption */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 24px;
+  margin: 24px 0;
+}
+
+.wide figure {
+  margin: 0;
+}
+
+.wide figure img,
+.wide figure video {
+  width: 100%;
+  max-height: none;
+  margin: 0;
+  object-fit: cover;
+}
+
+/* Photos and a phone video in one row, all the same height.
+   Column widths match the shapes: 3:4 photos, 9:16 video. */
+.media-row {
+  display: grid;
+  grid-template-columns: 4fr 4fr 3fr;
+  gap: 20px;
+  margin: 24px 0;
+}
+
+.media-row img,
+.media-row video {
+  aspect-ratio: 3 / 4;
+}
+
+.media-row .tall video {
+  aspect-ratio: 9 / 16;
+  background: #000;
+  object-fit: contain;
+}
+
+.panel > :first-child {
+  margin-top: 0;
+}
+
+.panel > :last-child {
+  margin-bottom: 0;
+}
+
+.wide .split figure img {
+  max-height: 520px;
+}
+
+.wide .panel table {
+  background: var(--bg);
+}
+
+/* Tables fill their column on big screens (they scroll sideways on phones) */
+@media (min-width: 801px) {
+  .wide table {
+    display: table;
+  }
+}
+
+.wide figcaption {
+  text-align: left;
+}
+
+@media (max-width: 1000px) {
+  .article-body {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 0;
+  }
+
+  .toc {
+    display: none;
+  }
+}
+
+@media (max-width: 800px) {
+  .article.wide {
+    padding: 32px 20px 64px;
+  }
+
+  .wide .article-head,
+  .split,
+  .split.compact,
+  .columns {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 24px;
+  }
+
+  .wide .article-head .head-media {
+    order: -1;
+  }
+
+  .split.reverse > :first-child {
+    order: 0;
+  }
+
+  .media-row {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  }
+
+  .media-row .tall {
+    grid-column: 1 / -1;
+    max-width: 320px;
+  }
+}
+
+.wide h4 {
+  font-size: 1.05rem;
+  margin: 28px 0 12px;
+}

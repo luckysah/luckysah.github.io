@@ -1,0 +1,24 @@
+---
+layout: default
+title: Projects
+summary: All of Lucky Sah's robotics and engineering projects, with step-by-step build guides.
+---
+<!-- The All projects page. Lists every projects/*/index.md automatically, newest first. -->
+
+{% include header.html %}
+
+<main class="projects-page">
+  <div class="container">
+    <h1>Projects</h1>
+    <p class="lead">Robotics and engineering projects, with build guides on how I made them.</p>
+
+    {% assign projects = site.pages | where: "layout", "project" | sort: "date", "first" | reverse %}
+    <div class="cards">
+      {% for project in projects %}
+        {% include project-card.html project=project %}
+      {% endfor %}
+    </div>
+  </div>
+</main>
+
+{% include footer.html %}

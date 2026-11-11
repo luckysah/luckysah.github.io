@@ -1,0 +1,75 @@
+---
+layout: default
+---
+<!-- Layout for every project page. The text comes from the project's index.md. -->
+
+{% include header.html %}
+
+<main class="article{% if page.wide %} wide{% endif %}">
+  <a class="back" href="{{ '/projects/' | relative_url }}">← All projects</a>
+
+  <div class="article-head">
+  <div class="head-text">
+  {% if page.category %}<span class="tag">{{ page.category }}</span>{% endif %}
+  <h1>{{ page.title }}</h1>
+  {% if page.summary %}<p class="lead">{{ page.summary }}</p>{% endif %}
+
+  {% if page.date or page.details %}
+  <dl class="meta">
+    {% if page.date %}<div><dt>Date</dt><dd>{{ page.date | date: "%B %Y" }}</dd></div>{% endif %}
+    {% for item in page.details %}<div><dt>{{ item[0] }}</dt><dd>{{ item[1] }}</dd></div>{% endfor %}
+  </dl>
+  {% endif %}
+  </div>
+
+  <div class="head-media">
+  {% comment %}
+    Top media. "hero" in index.md: an .mp4/.webm clip (plays silently on a loop, like a GIF)
+    or an image/GIF. If the file isn't in the folder yet, a placeholder box shows instead.
+    Without "hero", the "cover" photo is used.
+  {% endcomment %}
+  {% if page.hero %}
+    {% assign hero_path = page.dir | append: page.hero %}
+    {% assign hero_file = site.static_files | where: "path", hero_path | first %}
+    {% if hero_file %}
+      {% if hero_file.extname == ".mp4" or hero_file.extname == ".webm" %}
+      <video class="cover" src="{{ page.hero }}" autoplay muted loop playsinline
+             {% if page.cover %}poster="{{ page.cover }}"{% endif %}></video>
+      {% else %}
+      <img class="cover" src="{{ page.hero }}" alt="{{ page.title }}">
+      {% endif %}
+    {% else %}
+      <div class="cover media-placeholder">Demo video coming soon</div>
+    {% endif %}
+  {% elsif page.cover %}
+  <img class="cover" src="{{ page.cover }}" alt="{{ page.title }}">
+  {% endif %}
+  </div>
+  </div>
+
+  {% if page.youtube %}
+  <p><a class="button" href="{{ page.youtube }}" target="_blank" rel="noopener">Watch the full tutorial on YouTube ↗</a></p>
+  {% endif %}
+
+  {% if page.wide %}
+  {% comment %} "wide: true" in index.md: full-width page with an "On this page" menu built from the ## headings. {% endcomment %}
+  <div class="article-body">
+    <nav class="toc" aria-label="On this page">
+      <p class="toc-title">On this page</p>
+      {% assign sections = content | split: '<h2 id="' %}
+      {% for section in sections offset: 1 %}
+        {% assign section_id = section | split: '"' | first %}
+        {% assign section_title = section | split: '</h2>' | first | split: '">' | last %}
+        <a href="#{{ section_id }}">{{ section_title }}</a>
+      {% endfor %}
+    </nav>
+    <div class="prose">
+      {{ content }}
+    </div>
+  </div>
+  {% else %}
+  {{ content }}
+  {% endif %}
+</main>
+
+{% include footer.html %}

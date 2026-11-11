@@ -1,0 +1,217 @@
+---
+layout: default
+---
+  <div class="layout">
+
+    <!-- Left column: photo and overview. Stays in place while the page scrolls. -->
+    <aside class="sidebar">
+      <!-- Profile photo: save a square-ish photo as assets/images/profile.jpg.
+           Until then the "LS" placeholder shows. -->
+      <div class="photo">
+        <span aria-hidden="true">LS</span>
+        <img src="assets/images/profile.jpg" alt="Lucky Sah" onerror="this.remove()">
+      </div>
+
+      <h1 class="name">Lucky Sah</h1>
+      <p class="role">Mechatronics Engineering student<br>Robotics hardware and prototyping</p>
+
+      <dl class="side-info">
+        <dt>Currently</dt>
+        <dd>Prototyping Manager, Advanced Telerobotics Research Lab, Kent State University</dd>
+        <dd>Robotics Hardware Co-op, Open Drive LLC (Plaipin)</dd>
+        <dt>Education</dt>
+        <dd>B.S. Mechatronics Engineering, Minor in Computer Science, Kent State University, Honors College (expected 2028)</dd>
+        <dt>Contact</dt>
+        <dd class="side-links">
+          <a href="mailto:lsah@kent.edu">lsah@kent.edu</a>
+          <a href="https://github.com/luckysah" target="_blank" rel="noopener">GitHub</a>
+          <!-- <a href="https://www.linkedin.com/in/YOUR-HANDLE" target="_blank" rel="noopener">LinkedIn</a> -->
+          <a href="assets/docs/Lucky_Sah_Resume.pdf" target="_blank" rel="noopener">Resume (PDF)</a>
+        </dd>
+      </dl>
+
+      <nav class="side-nav" aria-label="Main">
+        <a href="#about">About</a>
+        <a href="#work">What I work on</a>
+        <a href="#experience">Experience</a>
+        <a href="#projects">Projects</a>
+        <a href="#publications">Publications</a>
+        <a href="#activities">Awards &amp; activities</a>
+        <a href="#resume">Resume</a>
+      </nav>
+    </aside>
+
+    <!-- Right column: content -->
+    <main class="content">
+
+      <section class="section" id="about">
+        <h2>About</h2>
+        <p>
+          I'm a Mechatronics Engineering student at Kent State University, in the Honors College
+          with a minor in Computer Science. I like building robots from start to finish: designing
+          the parts in CAD, making them with 3D printing and machining, wiring the electronics,
+          and writing the code that makes them move. Before university, I spent two years building
+          automated production machinery in Nepal.
+        </p>
+        <p>
+          I'm the Prototyping Manager at the Advanced Telerobotics Research (ATR) Lab and a
+          robotics hardware co-op on the Plaipin AI companion robot. I'm most interested in
+          expressive and humanoid robots, mobile robots and human–robot interaction.
+        </p>
+        <p>
+          I share my projects here as step-by-step build guides, so others can learn from them
+          and build their own.
+        </p>
+      </section>
+
+      <!-- One card per area of work, generated from work/*/index.md. -->
+      <section class="section" id="work">
+        <h2>What I work on</h2>
+        <div class="area-cards">
+          {% assign areas = site.pages | where: "layout", "area" | sort: "order" %}
+          {% for a in areas %}
+          <a class="area-card" href="{{ a.url | relative_url }}">
+            <h3>{{ a.title }}</h3>
+            <p>{{ a.short }}</p>
+            <ul class="chips">{% for h in a.highlights %}<li>{{ h }}</li>{% endfor %}</ul>
+            <span class="card-link">See the work →</span>
+          </a>
+          {% endfor %}
+        </div>
+      </section>
+
+      <section class="section" id="experience">
+        <h2>Experience</h2>
+
+        <div class="entry">
+          <div>
+            <h3>Prototyping Manager</h3>
+            <div class="org">Advanced Telerobotics Research (ATR) Lab, Kent State University</div>
+          </div>
+          <span class="date">Present</span>
+          <ul>
+            <li>Lead mechanical prototyping for research robots, from CAD through fabrication, assembly and working hardware.</li>
+            <li>Design and integrate structures, mounts, actuators, sensors and embedded hardware.</li>
+            <li>Develop ROS-based robot interfaces and simulation workflows in Isaac Sim and MuJoCo.</li>
+            <li>Manage prototyping equipment and workspace, and coordinate lab events and demos across research teams.</li>
+          </ul>
+          <div class="entry-tags"><a href="{{ '/work/mechanical-design/' | relative_url }}">Mechanical design</a><a href="{{ '/work/electronics-embedded/' | relative_url }}">Electronics</a><a href="{{ '/work/robotics-software/' | relative_url }}">Robotics software</a></div>
+        </div>
+
+        <div class="entry">
+          <div>
+            <h3>Robotics Hardware Intern (Co-op)</h3>
+            <div class="org">Open Drive LLC, Plaipin product line</div>
+          </div>
+          <span class="date">Present</span>
+          <ul>
+            <li>Lead mechanical CAD for the core device and modular body configurations of an AI companion robot.</li>
+            <li>Turn CAD designs into working prototypes, integrating actuators, sensors and onboard hardware through iterative builds.</li>
+          </ul>
+          <div class="entry-tags"><a href="{{ '/work/mechanical-design/' | relative_url }}">Mechanical design</a><a href="{{ '/work/electronics-embedded/' | relative_url }}">Electronics</a></div>
+        </div>
+
+        <div class="entry">
+          <div>
+            <h3>Automation and Product Development Intern</h3>
+            <div class="org">Thoplo Machine Pvt. Ltd. &amp; Baliyo Ventures Pvt. Ltd., Nepal</div>
+          </div>
+          <span class="date">2022 – 2024</span>
+          <ul>
+            <li>Designed, fabricated, assembled and tested parts for automated production machinery.</li>
+            <li>Set up and wired PLC lab equipment, and worked on machining and fiber-reinforced molded parts.</li>
+          </ul>
+          <div class="entry-tags"><a href="{{ '/work/industrial-automation/' | relative_url }}">Industrial automation</a><a href="{{ '/work/mechanical-design/' | relative_url }}">Mechanical design</a></div>
+        </div>
+      </section>
+
+      <!-- Preview of the 4 newest projects, generated from projects/*/index.md.
+           The full list is on projects/index.html. Nothing to edit here when you add a project. -->
+      <section class="section" id="projects">
+        <div class="section-head">
+          <h2>Projects</h2>
+          <a href="{{ '/projects/' | relative_url }}">View all projects →</a>
+        </div>
+        <div class="cards">
+          {% assign projects = site.pages | where: "layout", "project" | sort: "date", "first" | reverse %}
+          {% for project in projects limit: 4 %}
+            {% include project-card.html project=project %}
+          {% endfor %}
+        </div>
+      </section>
+
+      <section class="section" id="publications">
+        <h2>Publications</h2>
+        <p class="publication">
+          I. S. Cardenas, M. A. Arnett, N. C. Yeo, <strong>L. Sah</strong>, and J.-H. Kim,
+          “ROSClaw: An OpenClaw ROS 2 Framework for Agentic Robot Control and Interaction,”
+          <em>arXiv preprint</em>, 2026.
+          <a href="https://arxiv.org/abs/2603.26997" target="_blank" rel="noopener">arXiv:2603.26997</a>
+        </p>
+        <!-- Add more papers the same way, one <p class="publication"> each. -->
+      </section>
+
+      <section class="section" id="activities">
+        <h2>Awards &amp; activities</h2>
+
+        <div class="columns-2">
+          <div>
+            <h3>Awards</h3>
+            <ul class="plain-list">
+              <li>Winner, Physical AI Agent Track, Kent Hack Enough</li>
+              <li>Winner, Asian Development Bank (ADB) Hackathon</li>
+              <li>Glocal Teen Hero, Top 20 Under 20</li>
+              <li>Paper at IEEE RO-MAN 2026</li>
+              <li>Global Scholarship, Kent State University</li>
+            </ul>
+          </div>
+          <div>
+            <h3>Competitions &amp; events</h3>
+            <ul class="plain-list">
+              <li>World Robot Olympiad, Thailand</li>
+              <li>FIRST Global Challenge, Switzerland</li>
+              <li>Asia Pacific Conference of Young Scientists</li>
+              <li>Founders Inc, San Francisco</li>
+              <li>Robo-Battle Bots and Robo Soccer</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="entry">
+          <div>
+            <h3>Founder &amp; Organizer</h3>
+            <div class="org">Young Scientist Community Nepal (under RECAST, Tribhuvan University)</div>
+          </div>
+          <span class="date"></span>
+          <ul>
+            <li>Ran free robotics and STEM workshops, competitions and panel discussions with industry guests.</li>
+            <li>Travelled to rural schools in Nepal to teach free introductory robotics classes.</li>
+          </ul>
+        </div>
+
+        <div class="entry">
+          <div>
+            <h3>Robotics Teacher and Mentor</h3>
+            <div class="org">Schools in Nepal and Cleveland, Ohio</div>
+          </div>
+          <span class="date"></span>
+          <ul>
+            <li>Taught weekly robotics classes to students in grades 4–7: basic electronics, coding and building Bluetooth-controlled cars.</li>
+            <li>Mentored small groups of young students in Cleveland using Scratch and mBot robots.</li>
+          </ul>
+        </div>
+      </section>
+
+      <section class="section" id="resume">
+        <h2>Resume</h2>
+        <p>My full resume, including experience, projects and activities.</p>
+        <div class="actions">
+          <a class="button" href="assets/docs/Lucky_Sah_Resume.pdf" target="_blank" rel="noopener">Open resume (PDF)</a>
+          <a class="button button-outline" href="assets/docs/Lucky_Sah_Resume.pdf" download>Download</a>
+        </div>
+      </section>
+
+      <footer class="content-footer">© {{ site.time | date: "%Y" }} Lucky Sah</footer>
+
+    </main>
+  </div>

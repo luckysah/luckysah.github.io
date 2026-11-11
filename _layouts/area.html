@@ -1,0 +1,82 @@
+---
+layout: default
+---
+<!-- Layout for an "area of work" page (work/*/index.md).
+     The home page cards and this page both read the same front matter. -->
+
+{% include header.html %}
+
+<main class="area-page">
+  <div class="container">
+    <a class="back" href="{{ '/#work' | relative_url }}">← Home</a>
+
+    <span class="tag">Area of work</span>
+    <h1>{{ page.title }}</h1>
+    <p class="lead">{{ page.summary }}</p>
+
+    {% if page.skills %}
+    <section class="area-section">
+      <h2>Tools and skills</h2>
+      <ul class="chips">
+        {% for skill in page.skills %}<li>{{ skill }}</li>{% endfor %}
+      </ul>
+    </section>
+    {% endif %}
+
+    {% if page.experience %}
+    <section class="area-section">
+      <h2>Where I've used it</h2>
+      {% for job in page.experience %}
+      <div class="entry">
+        <div>
+          <h3>{{ job.role }}</h3>
+          <div class="org">{{ job.org }}</div>
+        </div>
+        <span class="date">{{ job.date }}</span>
+        <ul>
+          {% for point in job.points %}<li>{{ point }}</li>{% endfor %}
+        </ul>
+      </div>
+      {% endfor %}
+    </section>
+    {% endif %}
+
+    {% assign area_text = content | strip %}{% if area_text != "" %}
+    <section class="area-section area-text">
+      {{ content }}
+    </section>
+    {% endif %}
+
+    <section class="area-section">
+      <div class="section-head">
+        <h2>Projects</h2>
+        <a href="{{ '/projects/' | relative_url }}">View all projects →</a>
+      </div>
+      {% assign all_projects = site.pages | where: "layout", "project" | sort: "date", "first" | reverse %}
+      {% assign shown = 0 %}
+      <div class="cards">
+        {% for project in all_projects %}
+          {% if project.areas contains page.area %}
+            {% include project-card.html project=project %}
+            {% assign shown = shown | plus: 1 %}
+          {% endif %}
+        {% endfor %}
+      </div>
+      {% if shown == 0 %}
+      <p class="muted">Project write-ups for this area are coming soon.</p>
+      {% endif %}
+    </section>
+
+    <section class="area-section">
+      <h2>Other areas</h2>
+      <div class="area-links">
+        {% assign areas = site.pages | where: "layout", "area" | sort: "order" %}
+        {% for a in areas %}{% unless a.area == page.area %}
+        <a href="{{ a.url | relative_url }}">{{ a.title }} →</a>
+        {% endunless %}{% endfor %}
+      </div>
+    </section>
+  </div>
+</main>
+
+{% include footer.html %}

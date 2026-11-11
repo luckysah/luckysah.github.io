@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% if page.title %}
+  <title>{{ page.title }} | {{ site.title }}</title>
+  {% else %}
+  <title>{{ site.title }} | Robotics &amp; Mechatronics Engineering</title>
+  {% endif %}
+  <meta name="description" content="{{ page.summary | default: site.description | escape }}">
+  <meta property="og:title" content="{{ page.title | default: site.title | escape }}">
+  <meta property="og:description" content="{{ page.summary | default: site.description | escape }}">
+  <meta property="og:type" content="website">
+  {% if page.cover %}
+  <meta property="og:image" content="{{ page.url | append: page.cover | absolute_url }}">
+  {% endif %}
+  <link rel="icon" href="{{ '/assets/images/favicon.svg' | relative_url }}" type="image/svg+xml">
+  <link rel="stylesheet" href="{{ '/css/style.css' | relative_url }}">
+</head>
+<body{% if page.wide %} class="wide-page"{% endif %}>
+
+{{ content }}
+
+</body>
+</html>

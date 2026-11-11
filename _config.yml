@@ -1,0 +1,18 @@
+# Site settings. GitHub Pages reads this file and builds the site with Jekyll.
+
+title: Lucky Sah
+description: Mechatronics Engineering student and robotics researcher at Kent State University. Projects, build guides, publications, and resume.
+url: "https://luckysah.github.io"
+
+# Leave empty when the site is the luckysah.github.io repository.
+# If it's served from another repository instead, set this to "/repository-name".
+baseurl: ""
+
+markdown: kramdown
+kramdown:
+  input: GFM
+
+# Not part of the published website.
+exclude:
+  - drafts
+  - README.md

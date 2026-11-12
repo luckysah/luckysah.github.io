@@ -26,6 +26,13 @@ DYNAMIXEL motors talk over **one data wire**, and the ESP32's UART expects two (
 It turns out you can make it work with a jumper wire, one line of setup code and a small
 check in the driver. No extra chip. Here's how I did it.
 
+## Video tutorial
+
+<!-- When the YouTube video is up, replace the placeholder div below with:
+<iframe src="https://www.youtube.com/embed/VIDEO_ID" title="Single-wire half-duplex UART on the ESP32" allowfullscreen></iframe>
+-->
+<div class="media-placeholder">Video tutorial coming soon on YouTube</div>
+
 ## The problem
 
 ![A normal UART uses two wires, one per direction. A half-duplex bus uses one wire shared by the controller and several devices, which take turns.](images/duplex.svg)
@@ -255,6 +262,7 @@ PASS / FAIL.
 | Motor doesn't answer | Battery on? Level shifter powered? Common ground? Right ID and baud rate? |
 | Motor shows error 0x01 | Low-voltage lockout. Restart the motor, and turn the battery on before USB |
 | ESP32 resets when the motors work hard | Weak 5 V supply or low battery |
+| Build fails on Windows with "No such file or directory" in mbedtls | The folder path is too long. Move the project to a short path like `C:\dev\`, delete `build`, and build again |
 
 ## Files
 

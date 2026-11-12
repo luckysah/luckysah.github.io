@@ -195,7 +195,19 @@ Get the code from GitHub. You need **ESP-IDF** and **Python 3.10+**.
 
 **[Get the source code on GitHub →](https://github.com/luckysah/Two-Wheel-Self-Balancing-Robot)**
 
-Switch the battery on, plug the ESP32 into your PC, then:
+Switch the battery on and plug the ESP32 into your PC. Run each command from the repo folder.
+
+**1. Set the wheel direction (once).** The motors face opposite ways, so one of them has to
+be reversed. Flash `teleop`, then press `w` in the monitor. If a wheel spins backward, press
+`L` (left) or `R` (right) to reverse it. Space stops the wheels. The setting is saved in the
+motor.
+
+```
+cd teleop
+idf.py build flash monitor
+```
+
+**2. Flash the robot firmware:**
 
 ```
 cd balance
@@ -204,24 +216,33 @@ idf.py build flash
 
 Unplug USB. The robot now runs on the battery.
 
-### Step 7: Connect the app
+### Step 7: Use the app
 
 1. Switch the robot on and **keep it still for a second** while the sensor calibrates.
 2. On your PC, join the Wi-Fi network **BalanceBot** (password **balance123**).
 3. Start the app:
 
    ```
-   pip install PyQt6
+   pip install -r ui/requirements.txt
    python ui/robot_ui.py
    ```
 
-4. Click **Find robot**.
+4. Click **Find robot**. Once it says "connected", the boxes fill with the robot's saved
+   values.
 
-| Mode | Use |
-|------|-----|
-| Off | Motors free, for setup |
-| Manual drive | Drive without balancing (robot lying down) |
-| Balance | The robot balances. W/A/S/D drive it, Space stops it |
+![The robot control app: settings on the left, live status and plots on the right](images/app.png)
+*The control app.*
+
+| Part of the app | What it's for |
+|-----------------|---------------|
+| **Mode** | **Off** (motors free), **Manual drive** (drive without balancing, robot lying down) or **Balance**. Space or Esc switches to Off at any time |
+| **Drive** | Hold **W / A / S / D** to drive. The sliders set the speed. In Balance mode keep Speed low (5–10 rpm) |
+| **Balance tuning** | The PID values. Changes apply instantly; press **Save on robot** to keep them |
+| **Robot** | Live tilt, wheel speed and battery voltage. Shows "LOW" when the battery needs charging |
+| **Plots** | Top: how far the robot is leaning. Bottom: wheel speed. Hover to read values, **Pause plots** to freeze them |
+| **Log** (bottom) | Messages from the robot, like "Balance refused" or "motor not answering" |
+
+Click on the app window first, or the keys won't work.
 
 ### Step 8: Tune it
 

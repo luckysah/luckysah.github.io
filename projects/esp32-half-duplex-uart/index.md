@@ -267,7 +267,7 @@ PASS / FAIL.
 ## Files
 
 - [Schematic (PDF)](files/schematic.pdf)
-- [Source code on GitHub](https://github.com/luckysah)
+- [Source code on GitHub](https://github.com/luckysah/Single-Wire-Half-Duplex-UART-on-the-ESP32)
 
 ## Where it's used
 
